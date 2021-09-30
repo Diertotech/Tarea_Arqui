@@ -5,3 +5,6 @@ sudo apt install docker-compose
 
 ejecutar el docker-compise: 
 docker-compose up -d
+
+acceder a una imagen:
+docker exec -t "nombre contenedor" bash
