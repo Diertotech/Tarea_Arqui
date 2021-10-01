@@ -6,6 +6,9 @@ docker run -e POSTGRES_PASSWORD=123456 -p 5432:5432 postgres
 Iniicializar las variables de ambiente:
 source ./backend/.env
 
+Instalar go ubuntu:
+
+
 Instalando docker-compose:
 sudo apt install docker-compose
 
