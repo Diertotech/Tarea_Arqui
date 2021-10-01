@@ -7,6 +7,7 @@ Iniicializar las variables de ambiente:
 source ./backend/.env
 
 Instalar go ubuntu:
+sudo apt  install golang-go 
 
 
 Instalando docker-compose:
