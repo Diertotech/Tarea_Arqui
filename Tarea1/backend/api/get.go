@@ -23,6 +23,6 @@ func GetResenaByName(ctx *gin.Context) {
 func GetAllResenasByName(ctx *gin.Context) {
 	nombre := ctx.Request.URL.Query().Get("nombre")
 	reseñas := []db.Resena{}
-	db.DB.Where("name like ?", "%"+nombre+"%").Find(&reseñas)
+	db.DB.Where("nombre like ?", "%"+nombre+"%").Find(&reseñas)
 	ctx.JSON(200, reseñas)
 }

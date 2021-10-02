@@ -9,6 +9,7 @@ import (
 
 func DeleteResena(c *gin.Context) {
 	id := c.Param("id")
+
 	db.DB.Delete(&db.Resena{}, id)
 	c.JSON(200, gin.H{
 		"message": "Reseña eliminada",

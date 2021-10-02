@@ -28,6 +28,6 @@ func main() {
 	server.GET("/resenasbyname", api.GetAllResenasByName)
 	server.GET("/resena", api.GetAllResena)
 	server.POST("/resena", api.NewResena)
-	server.DELETE("/resenas/:id", api.DeleteResena)
+	server.DELETE("/resena/:id", api.DeleteResena)
 	server.Run()
 }
