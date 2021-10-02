@@ -25,7 +25,7 @@ Correr la ORM(creara las tablas de la base de datos por medio de go):
 go run ./setup/main.go ( debes estar parado dentro de backend )
 
 Correr la API:
-go run backend/cmd/main.go
+go run ./cmd/main.go
 
 
 
