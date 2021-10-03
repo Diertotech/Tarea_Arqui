@@ -27,6 +27,13 @@ go run ./setup/main.go ( debes estar parado dentro de backend )
 Correr la API:
 go run ./cmd/main.go
 
+-------------------------------------------------------------------
+levantar el front
 
+Instalar node:
+npm install
+
+Levantar el front:
+npm star
 
 
