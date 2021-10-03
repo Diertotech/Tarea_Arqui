@@ -29,5 +29,7 @@ func main() {
 	server.GET("/resena", api.GetAllResena)
 	server.POST("/resena", api.NewResena)
 	server.DELETE("/resena/:id", api.DeleteResena)
+	server.PUT("/resenaput1/:id/:calificacion", api.UpdateResenaCalificacion)
+	server.PUT("/resenaput2/:id/:comentario",api.UpdateResenaComentario)
 	server.Run()
 }
