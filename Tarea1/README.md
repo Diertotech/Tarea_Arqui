@@ -34,6 +34,6 @@ Instalar node:
 npm install
 
 Levantar el front:
-npm star
+npm start
 
 
