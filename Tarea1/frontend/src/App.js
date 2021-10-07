@@ -54,7 +54,7 @@ function App() {
     const [caratula, setCaratula] = useState("");
     const [genero, setGenero] = useState("");
     const [busqueda, setBusqueda] = useState("");
-    const [students, setReseña] = useState([]);
+    const [reseñas, setReseña] = useState([]);
     const [modal, setModal] = useState(false);
 
     useEffect(() => {
@@ -81,9 +81,7 @@ function App() {
 
     function ManejarGetResenaByName() {
         GetAllResenasByName(busqueda).then((data) => {
-            // const newStudents = [];
-            // newStudents.push(data);
-            // setStudents(newStudents);
+
             setReseña(data);
         });
     }
@@ -135,20 +133,20 @@ function App() {
                     </tr>
                 </thead>
                 <tbody>
-                    {students.map((student, index) => (
+                    {reseñas.map((reseña, index) => (
                         <tr key={index}>
-                            <th scope="row">{student.ID}  
+                            <th scope="row">{reseña.ID}  
 
-                            <Button color="primary" onClick={() => ManejarDeleteResena(student.ID)}>
+                            <Button color="primary" onClick={() => ManejarDeleteResena(reseña.ID)}>
                             Eliminar Reseña
                             </Button>
                             
                         </th>
-                            <td>{student.nombre}</td>
-                            <td>{student.calificacion}</td>
-                            <td>{student.comentario}</td>
-                            <td> <img src={student.caratula} alt="Imagen Caratula" width="500" height="600"/></td>
-                            <td>{student.genero}</td>
+                            <td>{reseña.nombre}</td>
+                            <td>{reseña.calificacion}</td>
+                            <td>{reseña.comentario}</td>
+                            <td> <img src={reseña.caratula} alt="Imagen Caratula" width="500" height="600"/></td>
+                            <td>{reseña.genero}</td>
                         </tr>
                     ))}
                 </tbody>
