@@ -9,6 +9,9 @@ docker-compose up -d
 acceder a una imagen:
 docker exec -t "nombre contenedor" bash
 
+crear imagen de un dockerfile:
+docker build  -t "pruebas9:dockerfile" .
+
 -------------------------------------------------------------------
 levantar el backend
 
