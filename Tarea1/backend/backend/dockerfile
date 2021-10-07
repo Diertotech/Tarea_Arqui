@@ -1,0 +1,31 @@
+
+#tomar una imagen de alpine con golang y lo llamamos builder
+FROM golang:1.16-alpine as builder
+#configuraciones de ambiente
+ENV GO111MODULE=on
+#ENV GOROOT=$HOME/go
+#ENV PATH=$PATH:$GOROOT/bin
+#instalar git
+RUN apk add --no-cache git
+#el directorio de trabajo es /app
+WORKDIR /app
+#copia todo el proyecto local en la carpeta app del docker
+COPY . /app/.
+#instalar librerias
+#RUN go get github.com/lib/pq
+RUN go mod download
+#RUN go get github.com/gin-gonic/gin
+#construir la aplicacion ( compilar )
+RUN go build -o app cmd/main.go 
+
+
+#se crea una imagen de alpine 
+FROM alpine
+#directorio de trabajo app
+WORKDIR /app
+#copia desde la imagen builder hacia la nueva imagen de alpine
+COPY --from=builder /app/app /app/app
+#siver para cambiar el tipo de usuario
+USER 1001
+#ejecutar el programa
+CMD ["./app"]
