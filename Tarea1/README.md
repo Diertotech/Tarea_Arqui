@@ -18,6 +18,9 @@ sudo apt  install golang-go
 Iniciar la imagen de postgres con variables de ambientes definidas:
 docker run -e POSTGRES_PASSWORD=123456 -p 5432:5432 postgres
 
+(ADVERTENCIA: Si hay problemas con el directorio del docker lo ideal es detener el contenedor donde este ubicado el archivo (5432) en caso contrario 
+debe eliminar el proceso que este ejecutando postgres previamente con el comando fuser -k 8080/tcp)
+
 Inicializar las variables de ambiente:
 source .env
 
