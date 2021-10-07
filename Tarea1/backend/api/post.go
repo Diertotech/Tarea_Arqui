@@ -6,9 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type Response struct {
-	Message string `json:"message"`
-}
+
 
 func NewResena(ctx *gin.Context) {
 
