@@ -35,20 +35,31 @@ const GetAllResenasByName = async (name) => {
     const myJson = await response.json();
     return myJson;
 };
+const DeleteResena = async (id) => {
+    const response = await fetch(`http://127.0.0.1:8080/resena/id=${id}`, {
+        method: "DELETE",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
+    });
+    const myJson = await response.json();
+    return myJson;
+};
 
 function App() {
     const [nombre, setName] = useState("");
-    const [calificacion, setLastname] = useState("");
+    const [calificacion, setCalificacion] = useState(0);
     const [comentario, setSection] = useState("");
     const [caratula, setCaratula] = useState("");
     const [genero, setGenero] = useState("");
     const [busqueda, setBusqueda] = useState("");
-    const [students, setStudents] = useState([]);
+    const [students, setReseña] = useState([]);
     const [modal, setModal] = useState(false);
 
     useEffect(() => {
         GetAllResena().then((data) => {
-            setStudents(data);
+            setReseña(data);
         });
     }, []);
 
@@ -62,39 +73,55 @@ function App() {
         };
         NewResena(body).then((data) => {
             GetAllResena().then((data) => {
-                setStudents(data);
+                setReseña(data);
             });
             setModal(false);
         });
     }
 
-    function handleGetStudentByName() {
+    function ManejarGetResenaByName() {
         GetAllResenasByName(busqueda).then((data) => {
             // const newStudents = [];
             // newStudents.push(data);
             // setStudents(newStudents);
-            setStudents(data);
+            setReseña(data);
+        });
+    }
+    function ManejarDeleteResena(ID) {
+        DeleteResena(ID).then((data) => {
+
+            GetAllResena().then((data) => {
+                setReseña(data);
+            });
         });
     }
 
+
     return (
+        
         <div className={styles.App}>
-            <h1 className={styles.Title}>Alumnos</h1>
+
+            <h1 className={styles.Title}>Peliculas</h1>
             <Form>
+            <Label for="busqueda">Buscar Pelicula</Label>
                 <FormGroup>
-                    <Label for="busqueda">Busqueda</Label>
-                    <Input
+
+                    <Input className={styles.l1}
                         type="text"
                         name="busqueda"
+                        placeholder="Nombre de la pelicula"
                         id="busqueda"
-                        placeholder="Brian"
                         value={busqueda}
                         onChange={(e) => setBusqueda(e.target.value)}
                     />
+            <Button className={styles.busqueda} color="primary" onClick={() => ManejarGetResenaByName()}>
+                BUSCAR
+            </Button>
                 </FormGroup>
             </Form>
-            <Button color="primary" onClick={() => handleGetStudentByName()}>
-                BUSCAR
+
+            <Button color="primary" onClick={() => setModal(!modal)}>
+                AGREGAR Reseña
             </Button>
             <Table striped bordered>
                 <thead>
@@ -110,7 +137,13 @@ function App() {
                 <tbody>
                     {students.map((student, index) => (
                         <tr key={index}>
-                            <th scope="row">{student.ID}</th>
+                            <th scope="row">{student.ID}  
+
+                            <Button color="primary" onClick={() => ManejarDeleteResena(student.ID)}>
+                            Eliminar Reseña
+                            </Button>
+                            
+                        </th>
                             <td>{student.nombre}</td>
                             <td>{student.calificacion}</td>
                             <td>{student.comentario}</td>
@@ -120,9 +153,7 @@ function App() {
                     ))}
                 </tbody>
             </Table>
-            <Button color="primary" onClick={() => setModal(!modal)}>
-                AGREGAR Reseña
-            </Button>
+
             <Modal centered isOpen={modal}>
                 <ModalHeader>Agregar reseña</ModalHeader>
                 <ModalBody>
@@ -132,14 +163,16 @@ function App() {
                             <Input type="text" name="name" id="name" placeholder="Nombre Pelicula" value={nombre} onChange={(e) => setName(e.target.value)} />
                         </FormGroup>
                         <FormGroup style={{ marginBottom: "20px" }}>
-                            <Label for="last_name">Calificacion</Label>
-                            <Input
+                            <Label for="calificacion">Calificacion</Label>
+                            <Input 
                                 type="number"
-                                name="last_name"
-                                id="last_name"
+                                name="calificacion"
+                                id="calificacion"
                                 placeholder="Calificacion Pelicula"
+                                min="0" 
+                                max="10"
                                 value={calificacion}
-                                onChange={(e) => setLastname(e.target.value)}
+                                onChange={(e) => setCalificacion(e.target.valueAsNumber)}
                             />
                         </FormGroup>
                         <FormGroup>
