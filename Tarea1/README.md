@@ -25,7 +25,7 @@ docker run -e POSTGRES_PASSWORD=123456 -p 5432:5432 postgres
 debe eliminar el proceso que este ejecutando postgres previamente con el comando fuser -k 8080/tcp)
 
 Inicializar las variables de ambiente:
-source .env
+source .env ( debes estar parado dentro de backend )
 
 Correr la ORM(creara las tablas de la base de datos por medio de go):
 go run ./setup/main.go ( debes estar parado dentro de backend )
