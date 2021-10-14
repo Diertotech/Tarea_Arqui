@@ -15,9 +15,14 @@ COPY . /app/.
 #RUN go get github.com/lib/pq
 RUN go mod download
 #RUN go get github.com/gin-gonic/gin
+RUN source 2.env
+
+
+RUN ./wait.sh go run ./setup/main.go 
+
 #construir la aplicacion ( compilar )
 RUN go build -o app cmd/main.go 
-
+#RUN go run db/setup.go
 
 #se crea una imagen de alpine 
 FROM alpine
@@ -25,7 +30,9 @@ FROM alpine
 WORKDIR /app
 #copia desde la imagen builder hacia la nueva imagen de alpine
 COPY --from=builder /app/app /app/app
+COPY wait.sh wait.sh
 #siver para cambiar el tipo de usuario
 USER 1001
 #ejecutar el programa
-CMD ["./app"]
+CMD ["./wait.sh", "db","./app"]
+

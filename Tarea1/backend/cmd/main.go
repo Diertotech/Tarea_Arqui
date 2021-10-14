@@ -25,7 +25,7 @@ func main() {
 		ValidateHeaders: false,
 	}))
 //endpoints
-	server.GET("/resenasbyname", api.GetAllResenasByName)
+	server.GET("/resenasbyname", api.GetAllResenasByName) 
 	server.GET("/resena", api.GetAllResena)
 	server.POST("/resena", api.NewResena)
 	server.DELETE("/resena/:id", api.DeleteResena)
