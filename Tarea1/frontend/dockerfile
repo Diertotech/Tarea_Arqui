@@ -1,0 +1,12 @@
+
+FROM node:12.2.0-alpine as build
+WORKDIR /app
+COPY package.json /app/package.json
+RUN npm install 
+COPY . /app
+RUN npm run build
+
+#Crear la carpeta build con el proyecto
+FROM nginx
+COPY --from=build /app/build /usr/share/nginx/html
+COPY default.conf /etc/nginx/conf.d/default.conf
